@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stage 6: The Sorcerer’s Revenge – The Inverted Enigma</title>
+  <!-- Google Fonts for a classical, Arabian Nights feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Animated gradient background with violet and blue hues (consistent design) */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cinzel', serif;
+      background: linear-gradient(45deg, #4B0082, #00008B, #8A2BE2, #1E90FF);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+      color: #f5f5f5;
+      position: relative;
+      text-align: center;
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+    
+    /* Container styling consistent with previous stages */
+    .container {
+      background: rgba(0, 0, 50, 0.8);
+      padding: 40px 50px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+      border: 2px solid #9370DB;
+      text-align: center;
+      margin: 40px auto;
+      animation: fadeInUp 1s ease-out forwards;
+      opacity: 0;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      color: #ffd700;
+    }
+    
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .instructions {
+      text-align: left;
+      margin: 20px 0;
+      font-size: 1.1em;
+    }
+    
+    .instructions li {
+      margin: 10px 0;
+    }
+    
+    form {
+      margin-top: 20px;
+      text-align: left;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      border: 2px solid #b8860b;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      box-sizing: border-box;
+    }
+    
+    input[type="text"]:focus {
+      border-color: #ffd700;
+      outline: none;
+    }
+    
+    button {
+      padding: 12px 20px;
+      font-size: 1em;
+      background-color: #b8860b;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      width: 100%;
+    }
+    
+    button:hover {
+      background-color: #d4af37;
+      transform: scale(1.05);
+    }
+    
+    #result {
+      margin-top: 20px;
+      font-size: 1.4em;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    .error {
+      background-color: rgba(255, 0, 0, 0.6);
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    .success {
+      background-color: rgba(0, 128, 0, 0.6);
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Stage 6: The Sorcerer’s Revenge – The Inverted Enigma</h1>
+    <p>Solve the layered puzzle to reveal the final numeric key.</p>
+    <div class="instructions">
+      <ol>
+        <li><strong>Anagram Puzzle 1:</strong> Unscramble the letters: <em>LEPAM</em>.</li>
+        <li><strong>Anagram Puzzle 2:</strong> Unscramble the letters: <em>HSWI</em>.</li>
+        <li><strong>Numerical Conversion:</strong> Convert each letter of the solved words to its alphabetical position, then sum the values for each word.
+          <ul>
+            <li>The first word's sum is calculated from its letters.</li>
+            <li>The second word's sum is calculated similarly.</li>
+          </ul>
+        </li>
+        <li><strong>Final Step:</strong> Multiply the two sums and extract the last two digits of the product to obtain your final numeric key.</li>
+      </ol>
+    </div>
+    <p>Enter your answers below:</p>
+    <form id="enigmaForm">
+      <label for="anagram1">1. Unscrambled word for "LEPAM":</label>
+      <input type="text" id="anagram1" placeholder="Your answer here">
+      
+      <label for="anagram2">2. Unscrambled word for "HSWI":</label>
+      <input type="text" id="anagram2" placeholder="Your answer here">
+      
+      <label for="finalKey">3. Final numeric key (last two digits of the product):</label>
+      <input type="text" id="finalKey" placeholder="Your answer here">
+      
+      <button type="submit">Submit Answers</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  
+  <script>
+    // Hide expected answers by storing them in Base64.
+    // "lamp" in base64: bGFtcA==
+    // "wish" in base64: d2lzaA==
+    // "78" in base64: Nzg=
+    const expectedAnagram1 = atob("bGFtcA=="); // decodes to "lamp"
+    const expectedAnagram2 = atob("d2lzaA==");  // decodes to "wish"
+    const expectedFinalKey = atob("Nzg=");       // decodes to "78"
+    
+    document.getElementById("enigmaForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      // Get and normalize user inputs
+      const ans1 = document.getElementById("anagram1").value.trim().toLowerCase();
+      const ans2 = document.getElementById("anagram2").value.trim().toLowerCase();
+      const finalInput = document.getElementById("finalKey").value.trim();
+      
+      const resultDiv = document.getElementById("result");
+      
+      if (ans1 === expectedAnagram1 && ans2 === expectedAnagram2 && finalInput === expectedFinalKey) {
+        resultDiv.innerHTML = '<div class="success">Correct! The numeric key <strong>' + expectedFinalKey + '</strong> has been recorded as a vital piece for the final meta challenge.</div>';
+      } else {
+        resultDiv.innerHTML = '<div class="error">One or more answers are incorrect. Please review your solutions and try again.</div>';
+      }
+    });
+  </script>
+</body>
+</html>
+
