@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Aladdin’s Final Battle </title>
+  <title>Aladdin’s Final Battle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /*7*/
     /* Animated gradient background */
     @keyframes gradientAnimation {
       0% { background-position: 0% 50%; }
@@ -34,8 +33,8 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
       border: 2px solid #ffd700;
     }
-    h1 { 
-      color: #ffd700; 
+    h1 {
+      color: #ffd700;
       margin-bottom: 10px;
     }
     .instructions {
@@ -113,10 +112,11 @@
       position: relative;
       display: inline-block;
     }
-    #genieReveal img {
+    #genieReveal .genie-container a img {
       width: 300px;
       display: block;
       margin: 0 auto;
+      cursor: pointer;
     }
     #genieMessage {
       margin-top: 15px;
@@ -161,7 +161,7 @@
   <div class="container">
     <h1>Aladdin’s Final Battle</h1>
     <p class="instructions">
-      
+      You're on your own way, champ! Go ahead, discover this challenge.
     </p>
     <ul class="ranking-list">
       <!-- Scrambled order with data-correct holding the proper number -->
@@ -207,7 +207,10 @@
   <!-- Success Popup with Sparkles -->
   <div id="genieReveal">
     <div class="genie-container">
-      <img src="./nateg.png" alt="Magic Genie">
+      <!-- Clickable image that acts as a link -->
+      <a href="https://www.instagram.com/nateg_issatso?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+        <img src="./nateg.png" alt="Magic Genie">
+      </a>
       <div class="sparkles">
         <div class="sparkle" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
         <div class="sparkle" style="top: 20%; right: 15%; animation-delay: 0.3s;"></div>
